@@ -1,17 +1,20 @@
-radio.set_group(121181)
+radio.set_group(121180)
 def startMenu():
     while not input.button_is_pressed(Button.A):
         basic.show_string("War Micro:bit Edition")
+    while not input.button_is_pressed(Button.A):
+        basic.show_string("Press a to search for a game!")
     findGame.find_Game()
 
 class findGame:
     #look for available games
     def find_Game():
-        gameFound = false  
+        gameFound = false
+radio.received_packet(RadioPacketProperty.SIGNAL_STRENGTH)
+        radio.send_string("game")  
         radio.on_received_string(on_received_string)
         while gameFound:
-            for a in 1,2,3:
-                radio.send_string("open?")
+                
 
         
     def on_received_string(self, receivedString):
@@ -19,10 +22,10 @@ class findGame:
             if status == "inGame":
                 radio.send_string("closed")
         if receivedString == "closed":
-            status = false
-
-class cardGame:
-    def __init__(self):
-        self.data = []
+            
+        
+#class cardGame:
+#    def __init__(self):
+#       self.data = []
 
     
