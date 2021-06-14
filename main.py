@@ -9,8 +9,7 @@ def startMenu():
 class findGame:
     #look for available games
     def find_Game():
-        gameFound = false
-radio.received_packet(RadioPacketProperty.SIGNAL_STRENGTH)
+        gameFound = "false"
         radio.send_string("game")  
         radio.on_received_string(on_received_string)
         while gameFound:
