@@ -1,22 +1,10 @@
 radio.setGroup(121181)
-
-class findGame {
-    // look for available games
-    
-    public on_received_string(receivedString: any) {
-        let status: ?20925[];
-        if (receivedString == "open?") {
-            if (status == "inGame") {
-                radio.sendString("closed")
-            }
-            
-        }
-        
-        if (receivedString == "closed") {
-            status = []
-        }
-        
-    }
-    
+while (!input.buttonIsPressed(Button.A)) {
+    basic.showString("Battleship Micro:bit Edition")
 }
-
+let a = 0
+while (!input.buttonIsPressed(Button.A)) {
+    led.toggle(a, a)
+    led.toggle(a, a)
+    a += 1
+}
