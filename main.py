@@ -1,30 +1,54 @@
-radio.set_group(121180)
-def startMenu():
-    while not input.button_is_pressed(Button.A):
-        basic.show_string("War Micro:bit Edition")
-    while not input.button_is_pressed(Button.A):
-        basic.show_string("Press a to search for a game!")
-    findGame.find_Game()
+radio.set_group(121)
+ship1=0
+ship2=0
+ship3=0
+def on_received_number(receivedNumber):
+    if (receivedNumber == ship1):
+        ship1 = -1
+    if (receivedNumber == ship2):
+        ship1 = -1
+    if (receivedNumber == ship3):
+        ship1 = -1
+radio.on_received_number(on_received_number)
 
-class findGame:
-    #look for available games
-    def find_Game():
-        gameFound = "false"
-        radio.send_string("game")  
-        radio.on_received_string(on_received_string)
-        while gameFound:
-                
+a=0
+while True:
+    if not input.button_is_pressed(Button.A):
+        for b in range(0,5):
+            for a in range(0,5)
+                led.toggle(b,a)
+                basic.pause(750)
+            led.toggle(a,a)
+            a+=1
+ship1= a
 
-        
-    def on_received_string(self, receivedString):
-        if receivedString == "open?":
-            if status == "inGame":
-                radio.send_string("closed")
-        if receivedString == "closed":
-            
-        
-#class cardGame:
-#    def __init__(self):
-#       self.data = []
 
-    
+a=0
+while True:
+    if not input.button_is_pressed(Button.A):
+        led.toggle(a,a)
+        basic.pause(750)
+        led.toggle(a,a)
+        a+=1
+ship2= a
+
+a=0
+while True:
+    if input.button_is_pressed(Button.A):
+        led.toggle(a,a)
+        basic.pause(750)
+        led.toggle(a,a)
+        a+=1
+ship3= a
+
+while True:
+    if (ship1==1 and ship2 ==-1 and ship3==-1):
+        break
+    if input.button_is_pressed(Button.A):
+        led.toggle(a,a)
+        basic.pause(750)
+        led.toggle(a,a)
+        a+=1
+    radio.send_number(a)
+basic.clear_screen()
+basic.show_string("You lose!")
