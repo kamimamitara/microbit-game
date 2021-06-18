@@ -1,54 +1,87 @@
 radio.set_group(121)
-ship1=0
-ship2=0
-ship3=0
-def on_received_number(receivedNumber):
-    if (receivedNumber == ship1):
-        ship1 = -1
-    if (receivedNumber == ship2):
-        ship1 = -1
-    if (receivedNumber == ship3):
-        ship1 = -1
-radio.on_received_number(on_received_number)
+radio.send_number(0)
+ship1=[0,0]
+ship2=[0,0]
+ship3=[0,0]
+
+a = 0
+b = 0
+
+def on_button_pressed_a():
+    global a
+    global b
+    a+=1
+    
+
+def on_button_pressed_b():
+    global a
+    global b
+    b+=1
+
+while not input.logo_is_pressed():
+    input.on_button_pressed(Button.A, on_button_pressed_a)
+    input.on_button_pressed(Button.B, on_button_pressed_b)
+    led.toggle(a,b)
+    led.toggle(a,b)
+    basic.pause(750)
+    led.toggle(a,b)
+
+ship1= [a,b]
+a=0
+b=0
+basic.clear_screen()
+basic.show_icon(IconNames.YES)
+basic.pause(1000)
+basic.clear_screen()
+
+while not input.logo_is_pressed():
+    input.on_button_pressed(Button.A, on_button_pressed_a)
+    input.on_button_pressed(Button.B, on_button_pressed_b)
+    led.toggle(a,b)
+    led.toggle(a,b)
+    basic.pause(750)
+    led.toggle(a,b)
+ship2= [a,b]
 
 a=0
-while True:
-    if not input.button_is_pressed(Button.A):
-        for b in range(0,5):
-            for a in range(0,5)
-                led.toggle(b,a)
-                basic.pause(750)
-            led.toggle(a,a)
-            a+=1
-ship1= a
+b=0
+basic.clear_screen()
+basic.show_icon(IconNames.YES)
+basic.pause(1000)
+basic.clear_screen()
 
+while not input.logo_is_pressed():
+    input.on_button_pressed(Button.A, on_button_pressed_a)
+    input.on_button_pressed(Button.B, on_button_pressed_b)
+    led.toggle(a,b)
+    led.toggle(a,b)
+    basic.pause(750)
+    led.toggle(a,b)
+ship3= [a,b]
 
-a=0
-while True:
-    if not input.button_is_pressed(Button.A):
-        led.toggle(a,a)
-        basic.pause(750)
-        led.toggle(a,a)
-        a+=1
-ship2= a
+basic.clear_screen()
+basic.show_icon(IconNames.YES)
+basic.pause(1000)
+basic.clear_screen()
 
-a=0
-while True:
-    if input.button_is_pressed(Button.A):
-        led.toggle(a,a)
-        basic.pause(750)
-        led.toggle(a,a)
-        a+=1
-ship3= a
+def on_received_value(name, value):
+    ship = [int(name),value]
+    if (ship == ship1):
+        ship1 = [-1,-1]
+    if (ship == ship2):
+        ship1 = [-1,-1]
+    if (ship == ship3):
+        ship1 = [-1,-1]
+radio.on_received_value(on_received_value)
 
 while True:
-    if (ship1==1 and ship2 ==-1 and ship3==-1):
+    if (ship1== [-1,-1] and ship2 == [-1,-1] and ship3== [-1,-1]):
         break
-    if input.button_is_pressed(Button.A):
-        led.toggle(a,a)
-        basic.pause(750)
-        led.toggle(a,a)
-        a+=1
-    radio.send_number(a)
+    input.on_button_pressed(Button.A, on_button_pressed_a)
+    input.on_button_pressed(Button.B, on_button_pressed_b)
+    led.toggle(a,b)
+    basic.pause(750)
+    led.toggle(a,b)
+    radio.send_value(str(a), b)
 basic.clear_screen()
 basic.show_string("You lose!")
